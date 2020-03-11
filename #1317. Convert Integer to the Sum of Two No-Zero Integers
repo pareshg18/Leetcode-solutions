@@ -1,0 +1,15 @@
+class Solution(object):
+    def getNoZeroIntegers(self, n):
+        """
+        :type n: int
+        :rtype: List[int]
+        """
+        lst = []
+        for i in range(1,n):
+            val= n-i
+            if '0' not in str(i) and '0' not in str(val):
+                lst.append(i)
+                lst.append(val)
+                break
+        
+        return(lst)
