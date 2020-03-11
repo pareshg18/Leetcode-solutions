@@ -1,0 +1,7 @@
+#1365. How Many Numbers Are Smaller Than the Current Number
+
+def smallerNumbersThanCurrent(self, nums):
+    lst = []
+    for j in nums:
+        lst.append(len([i for i in nums if i <j]))
+    return(lst)
