@@ -1,0 +1,25 @@
+class Solution(object):
+    def sortByBits(self, arr):
+        """
+        :type arr: List[int]
+        :rtype: List[int]
+        """
+        
+        binary = [bin(i)[2:] for i in arr]
+        
+        lst=[]
+        add = 0
+        for i in binary:
+            for j in i:
+                add += int(j)
+            lst.append(add)    
+            add = 0
+            
+        comb =[]
+        for i in range(len(arr)):
+            comb.append([arr[i],lst[i]])
+
+        sorted_comb = sorted(comb,key = lambda x: [x[1],x[0]])
+        
+            
+        return([i[0] for i in sorted_comb])
