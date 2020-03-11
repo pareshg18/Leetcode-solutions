@@ -1,0 +1,33 @@
+class Solution(object):
+    def sortString(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        
+        result = ''
+        
+        while len(s) != 0:
+            uni = []
+            for i in s:
+                if i not in uni:
+                    uni.append(i)
+            uni = ''.join(uni)
+            
+            while len(uni) != 0:
+                result += min(uni)
+                s = s.replace(min(uni),"",1)
+                uni = uni.replace(min(uni),"",1)
+                
+            uni = []
+            for i in s:
+                if i not in uni:
+                    uni.append(i)
+            uni = ''.join(uni)
+            
+            while len(uni) != 0:
+                result += max(uni)
+                s = s.replace(max(uni),"",1)
+                uni = uni.replace(max(uni),"",1)
+                
+        return(result)
