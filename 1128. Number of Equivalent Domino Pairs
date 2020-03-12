@@ -1,0 +1,21 @@
+class Solution:
+    def numEquivDominoPairs(self, dominoes: List[List[int]]) -> int:
+        
+        import collections
+        
+        lst = []
+        for i in dominoes:
+            lst.append(tuple(sorted(i)))
+            
+        counts = collections.Counter(lst)
+        total =[]
+        for x,y in counts.items():
+            if y>1:
+                total.append(y)
+                
+        ans = 0
+        for i in total:
+            for j in range(i):
+                ans+=j
+                
+        return(ans)
