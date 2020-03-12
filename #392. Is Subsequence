@@ -1,0 +1,27 @@
+class Solution(object):
+    def isSubsequence(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: bool
+        """
+        import collections
+        import re
+
+        countS= collections.Counter(s)
+        countT= collections.Counter(t)
+        
+        for i,j in countS.items():
+            if j > countT[i]:
+                return(False)
+            
+            
+        lst = [-1]
+        for i in s:
+            ind = [m.start() for m in re.finditer(i,t)]
+            val = [i for i in ind if i > lst[-1]]
+            if len(val) ==0:
+                return(False)
+            lst.append(val[0])
+            
+        return(lst == sorted(lst))
