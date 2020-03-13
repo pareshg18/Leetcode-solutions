@@ -1,0 +1,23 @@
+class Solution(object):
+    def findLHS(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        d = {}
+        for i in nums:
+            if i not in d:
+                d[i] =1
+            else:
+                d[i] += 1        
+        
+        count = []
+        for i in d:
+            if i+1 in d:
+                count.append(d[i] +d[i+1])
+
+        
+        if len(count) >0:
+            return(max(count))
+        else:
+            return(0)
