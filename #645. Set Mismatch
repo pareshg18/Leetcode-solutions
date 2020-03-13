@@ -1,0 +1,20 @@
+class Solution(object):
+    def findErrorNums(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        nums.sort()
+        import collections
+        counts = collections.Counter(nums)
+        
+        lst = [x for x,y in counts.items()if y ==2]
+        if 1 not in nums:
+            lst.append(1)
+            return(lst)
+        
+        for i in range(len(nums)):
+            if nums[i]+1 not in nums:
+                lst.append(nums[i]+1)
+                break
+        return(lst)
