@@ -1,0 +1,19 @@
+class Solution:
+    def isValid(self, s: str) -> bool:
+        
+        openB = ['(','{','[']
+        closeB = [')','}',']']
+        
+        valid = ''
+        for i in s:
+            if i in openB:
+                valid += i
+            if i in closeB:
+                if len(valid) == 0:
+                    return(False)
+                if closeB.index(i) == openB.index(valid[-1]):
+                    valid = valid[:len(valid)-1]
+                elif closeB.index(i) != openB.index(valid[-1]):
+                    return(False)
+                
+        return(len(valid)==0)
