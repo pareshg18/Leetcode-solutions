@@ -1,0 +1,17 @@
+class Solution(object):
+    def convertToTitle(self, n):
+        """
+        :type n: int
+        :rtype: str
+        """
+        letters = "ZABCDEFGHIJKLMNOPQRSTUVWXY"
+        num = [i for i in range(0,26)]
+        d = dict(zip(num,letters))
+        lst = []
+        while n > 0:
+            res = n%26
+            lst.append(d.get(res))
+            n = (n - (res if res else 26))//26
+            
+            
+        return(''.join(lst[::-1]))
