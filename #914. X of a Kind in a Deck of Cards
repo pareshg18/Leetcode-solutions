@@ -1,0 +1,29 @@
+class Solution:
+    def hasGroupsSizeX(self, deck: List[int]) -> bool:
+        import collections
+        import math
+        
+        import collections
+        
+        counts = collections.Counter(deck)
+        
+        for i in counts.values():
+            if i<2:
+                return(False)
+        values = [i for i in set(counts.values())]
+        
+        if len(values)==1:
+            return(True)
+        
+        num1=values[0]
+        num2=values[1]
+        gcd = math.gcd(num1,num2)
+        
+        if len(values)>2:
+            for i in range(2,len(values)):
+                gcd = math.gcd(gcd,values[i])
+        if gcd==1:
+            return(False)
+        else:
+            return(True)
+        
