@@ -1,0 +1,46 @@
+class Solution(object):
+    def numRookCaptures(self, board):
+        """
+        :type board: List[List[str]]
+        :rtype: int
+        """
+        for i in range(len(board)):
+            if "R" in board[i]:
+                ind1 = i
+                ind2 = board[i].index("R")
+                break
+                
+        pawn = 0
+        if ind2>0:
+            for i in range(1,ind2+1):
+                if board[ind1][ind2-i] == "p":
+                    pawn +=1
+                    break
+                if board[ind1][ind2-i] == "B":
+                    break
+                    
+        if ind2<len(board[ind1]):
+            for i in range(ind2+1,len(board[ind1])):
+                if board[ind1][i] == "p":
+                    pawn+= 1
+                    break
+                if board[ind1][i] == "B":
+                    break
+                    
+        if ind1>0:
+            for i in range(1,ind1+1):
+                if board[ind1-i][ind2] == "p":
+                    pawn+=1
+                    break
+                if board[ind1-i][ind2] == "B":
+                    break
+                    
+        if ind1<len(board):
+            for i in range(ind1+1,len(board)):
+                if board[i][ind2] == "p":
+                    pawn+=1
+                    break
+                if board[i][ind2] == "B":
+                    break
+                    
+        return(pawn)
