@@ -1,0 +1,68 @@
+Given 3 positives numbers a, b and c. Return the minimum flips required in some bits of a and b to make ( a OR b == c ). (bitwise OR operation).
+Flip operation consists of change any single bit 1 to 0 or change the bit 0 to 1 in their binary representation.
+
+ 
+
+Example 1:
+
+
+
+Input: a = 2, b = 6, c = 5
+Output: 3
+Explanation: After flips a = 1 , b = 4 , c = 5 such that (a OR b == c)
+Example 2:
+
+Input: a = 4, b = 2, c = 7
+Output: 1
+Example 3:
+
+Input: a = 1, b = 2, c = 3
+Output: 0
+ 
+
+Constraints:
+
+1 <= a <= 10^9
+1 <= b <= 10^9
+1 <= c <= 10^9
+
+
+-----------------------Solution-----------------------------
+
+class Solution:
+    def minFlips(self, a: int, b: int, c: int) -> int:
+        
+        def or_gate(x,y):
+            ans = ''
+            for i in range(len(x)):
+                if x[i] == y[i] == '0':
+                    ans+='0' 
+                else:
+                    ans+= '1'
+            return ans
+        
+        ba = bin(a)[2:]
+        bb = bin(b)[2:]
+        bc = bin(c)[2:]
+        
+        maxi = max(len(ba),len(bb),len(bc))
+        
+        ba = ba.zfill(maxi+1)
+        bb = bb.zfill(maxi+1)
+        bc = bc.zfill(maxi+1)
+        
+        orgate = or_gate(ba,bb)
+        
+        count = 0
+        
+        for i in range(len(orgate)):
+            if orgate[i] != bc[i]:
+                if orgate[i] == '0':
+                    count +=1
+                elif orgate[i] == '1':
+                    if ba[i] == bb[i] == '1':
+                        count +=2
+                    else:
+                        count +=1
+                        
+        return count         
