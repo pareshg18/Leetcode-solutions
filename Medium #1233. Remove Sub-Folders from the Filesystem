@@ -1,0 +1,72 @@
+Given a list of folders, remove all sub-folders in those folders and return in any order the folders after removing.
+
+If a folder[i] is located within another folder[j], it is called a sub-folder of it.
+
+The format of a path is one or more concatenated strings of the form: / followed by one or more lowercase English letters. For example, /leetcode and /leetcode/problems are valid paths while an empty string and / are not.
+
+ 
+
+Example 1:
+
+Input: folder = ["/a","/a/b","/c/d","/c/d/e","/c/f"]
+Output: ["/a","/c/d","/c/f"]
+Explanation: Folders "/a/b/" is a subfolder of "/a" and "/c/d/e" is inside of folder "/c/d" in our filesystem.
+Example 2:
+
+Input: folder = ["/a","/a/b/c","/a/b/d"]
+Output: ["/a"]
+Explanation: Folders "/a/b/c" and "/a/b/d/" will be removed because they are subfolders of "/a".
+Example 3:
+
+Input: folder = ["/a/b/c","/a/b/ca","/a/b/d"]
+Output: ["/a/b/c","/a/b/ca","/a/b/d"]
+ 
+
+Constraints:
+
+1 <= folder.length <= 4 * 10^4
+2 <= folder[i].length <= 100
+folder[i] contains only lowercase letters and '/'
+folder[i] always starts with character '/'
+Each folder name is unique.
+
+
+----------------------Solution--------------------
+
+class Solution:
+    def removeSubfolders(self, folder: List[str]) -> List[str]:
+        import re
+        ind =1
+        ans = []
+        #fold = folder[0:]
+        d = {'0':None}
+        
+        while len(d) !=0:       
+            d = {}
+            pattern = "/[a-z]+"*ind
+        
+            for i in range(len(folder)):
+                m = re.search(pattern,folder[i])
+                if m[0] not in d:
+                    d[m[0]] = []
+                    
+            for i in range(len(folder)):
+                m =re.search(pattern,folder[i])
+                d[m[0]].append(folder[i])
+                
+            for i in range(len(d)):
+                if len(list(d.keys())[i]) in [len(i) for i in list(d.values())[i]]:
+                    ans.append(list(d.keys())[i])
+                    
+            for i in ans:
+                if i in d:
+                    del d[i]
+                    
+            ind +=1
+            if len(d) == 0:
+                return (ans)
+            
+            folder = []
+            for i in list(d.values()):
+                for j in i:
+                    folder.append(j)
