@@ -1,0 +1,58 @@
+Given a string containing just the characters '(' and ')', find the length of the longest valid (well-formed) parentheses substring.
+
+Example 1:
+
+Input: "(()"
+Output: 2
+Explanation: The longest valid parentheses substring is "()"
+Example 2:
+
+Input: ")()())"
+Output: 4
+Explanation: The longest valid parentheses substring is "()()"
+
+
+
+
+--------------------------Solution------------------------------------
+
+class Solution:
+    def longestValidParentheses(self, s: str) -> int:
+        
+        max_val = 0
+        
+        left = 0
+        right = 0
+        for i in s:
+            if i == '(':
+                left +=1
+            elif i == ")":
+                right +=1
+                
+            if right > left:
+                left = 0
+                right = 0
+            
+            if left == right:
+                max_val = max(max_val,2*left)
+                
+        rev = s[::-1]
+        
+        
+        left = 0
+        right = 0
+        for i in rev:
+            if i == '(':
+                left +=1
+            elif i == ")":
+                right +=1
+                
+            if right < left:
+                left = 0
+                right = 0
+            
+            if left == right:
+                max_val = max(max_val,2*left)
+                
+        return max_val
+        
