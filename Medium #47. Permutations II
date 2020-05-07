@@ -1,0 +1,28 @@
+Given a collection of numbers that might contain duplicates, return all possible unique permutations.
+
+Example:
+
+Input: [1,1,2]
+Output:
+[
+  [1,1,2],
+  [1,2,1],
+  [2,1,1]
+]
+
+
+--------------Solution---------------------------
+
+class Solution:
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        
+        import itertools
+        combo = list(itertools.permutations(nums))
+        
+        ans = []
+        
+        for i in combo:
+            if i not in ans:
+                ans.append(i)
+                
+        return ans
